@@ -38,5 +38,4 @@ public class Simulator {
 		long delay = UniformGenerator.generate();
 		schedule(new DepartureEvent(), delay);
 	}
-	
 }
