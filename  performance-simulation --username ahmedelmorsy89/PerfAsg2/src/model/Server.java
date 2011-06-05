@@ -1,15 +1,17 @@
 package model;
 
+import java.util.ArrayList;
+
 
 public class Server {
 
 	private boolean idle;
-	private int queueLen;
+	private ArrayList<Job> queue;
 	private int id;
 	
 	public Server(int i) {
 		this.idle = true;
-		this.queueLen = 0;
+		this.queue = new ArrayList<Job>();
 		this.id = i;
 	}
 
@@ -18,7 +20,7 @@ public class Server {
 	}
 
 	public int getQueueLen() {
-		return queueLen;
+		return queue.size();
 	}
 
 	public int getId() {
@@ -29,11 +31,11 @@ public class Server {
 		this.idle = false;
 	}
 
-	public void enqueueJob() {
-		this.queueLen++;
+	public void enqueueJob(Job job) {
+		this.queue.add(job);
 	}
 	
-	public void dequeueJob() {
-		this.queueLen--;
+	public Job dequeueJob() {
+		return this.queue.remove(0);
 	}
 }
