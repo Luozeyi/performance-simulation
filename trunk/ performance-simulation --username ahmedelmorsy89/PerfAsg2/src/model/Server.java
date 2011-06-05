@@ -24,4 +24,16 @@ public class Server {
 	public int getId() {
 		return id;
 	}
+
+	public void setBusy() {
+		this.idle = false;
+	}
+
+	public void enqueueJob() {
+		this.queueLen++;
+	}
+	
+	public void dequeueJob() {
+		this.queueLen--;
+	}
 }
