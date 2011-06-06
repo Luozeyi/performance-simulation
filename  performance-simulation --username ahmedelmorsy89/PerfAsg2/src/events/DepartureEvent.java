@@ -10,7 +10,7 @@ public class DepartureEvent extends TimerTask {
 	private Simulator simulator;
 	private int serverId;
 	static UniformGenerator itemInspection = new UniformGenerator(0);
-	
+
 	public DepartureEvent(Simulator sim, int id) {
 		this.simulator = sim;
 		this.serverId = id;
@@ -20,6 +20,12 @@ public class DepartureEvent extends TimerTask {
 	public void run() {
 		if (this.serverId == 1) { // Dept. of server 1 is Arrival of server 2
 			this.simulator.getServer(serverId).dequeueJob();
+
+			if (this.simulator.getServer(serverId).getQueueLen() > 0) {
+				simulator.getServer(serverId).setIdle(false);
+				simulator.startService();
+			} else
+				simulator.getServer(serverId).setIdle(true);
 			this.simulator.schedule(new ArrivalEvent(simulator, 2, new Job(),
 					true), 0);
 		} else {
