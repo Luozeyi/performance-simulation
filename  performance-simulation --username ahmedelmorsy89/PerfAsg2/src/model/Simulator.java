@@ -39,8 +39,8 @@ public class Simulator {
 		this.timer.schedule(departureEvent, delay);
 	}
 	
-	public void startService() {
+	public void startService(Job job, int serverId) {
 		long delay = uniformRand.generate();
-		schedule(new DepartureEvent(), delay);
+		schedule(new DepartureEvent(this, serverId, job), delay);
 	}
 }
