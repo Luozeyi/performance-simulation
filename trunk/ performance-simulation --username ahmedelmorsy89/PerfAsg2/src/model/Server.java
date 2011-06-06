@@ -38,4 +38,8 @@ public class Server {
 	public Job dequeueJob() {
 		return this.queue.remove(0);
 	}
+
+	public Job getServicedJob() {
+		return this.queue.get(0);
+	}
 }
