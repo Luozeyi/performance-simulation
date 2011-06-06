@@ -33,9 +33,10 @@ public class SeedsGenerators {
 		seedsArr = new ArrayList<Integer>();
 
 		int number = -1;
-		for (int i = 0; i < UniformGenerator.getMaxLength(); i++) {
+		int l  = UniformGenerator.getMaxLength()/nSeeds;
+		for (int i = 1; i < UniformGenerator.getMaxLength(); i++) {
 			number = g.generateS();
-			if (i % periodLenght == 0) {
+			if (i % l == 0) {
 				seedsArr.add( number);
 			}
 		}

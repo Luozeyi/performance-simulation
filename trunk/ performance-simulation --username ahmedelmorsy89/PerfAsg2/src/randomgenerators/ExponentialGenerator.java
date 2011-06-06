@@ -10,7 +10,7 @@ public class ExponentialGenerator  implements Generator{
 	
 	public ExponentialGenerator(double lambda) {
 		this.lambda = -1/((double)lambda);
-		SeedsGenerators.getInstance().generate(UniformGenerator.getMaxLength(), 4);
+		SeedsGenerators.getInstance().generate(UniformGenerator.getMaxLength(), 6);
 		uni = new UniformGenerator(SeedsGenerators.getInstance().getSeed());
 	}
 	
