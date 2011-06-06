@@ -1,16 +1,19 @@
 package randomgenerators;
 
+import java.io.File;
+
 import utilities.HistogrameDrawble;
 
-public class UniformGenerator implements Generator {
+public class UniformGenerator extends Generator {
 
 
 	private int current;
 	private final int m = 2311;
 	private final int a = 13;
-	private static int seed;
+
 
 	public UniformGenerator(int seed) {
+		file = new File("unifromSeed.txt");
 		this.current = seed;
 	}
 
@@ -46,12 +49,18 @@ public class UniformGenerator implements Generator {
 		
 	}
 
+	@Override
+	public int getMaxLength() {
+		return m;
+	}
+
 	public boolean isFullSequance() {
 		for (int i = 1; i < m - 1; i++)
 			if (Math.pow(a, i) % m == 1)
 				return false;
 		return true;
 	}
+
 
 	public static void main(String[] args) {
 
@@ -68,11 +77,7 @@ public class UniformGenerator implements Generator {
 
 	}
 
-	@Override
-	public int getSeed() {
-		
-		return 0;
-	}
+
 
 
 }
