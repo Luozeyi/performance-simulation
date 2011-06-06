@@ -3,9 +3,8 @@ package model;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import randomgenerators.ExponentialGenerator;
+import randomgenerators.SeedsGenerators;
 import randomgenerators.UniformGenerator;
-
 import events.DepartureEvent;
 
 public class Simulator {
@@ -13,15 +12,16 @@ public class Simulator {
 	private Server machiningCenter;
 	private Server inspectionStation;
 	private Timer timer;
-	private UniformGenerator uniformRand;
-	private ExponentialGenerator expRand;
+	static UniformGenerator[] serverServiceTime = 
+	{ new UniformGenerator(SeedsGenerators.getInstance().getSeed()), new UniformGenerator(SeedsGenerators.getInstance().getSeed())};
+	
+	private static final double[] SERVER_Service_FROM = {19.5, 22.5};
+	private static final double[] SERVER_Service_TO = {21, 24};
 	
 	public Simulator() {
-		this.machiningCenter = new Server(1);
-		this.inspectionStation = new Server(2);
+		this.machiningCenter = new Server(0);
+		this.inspectionStation = new Server(1);
 		this.timer = new Timer();
-		int seed = 1;
-		this.uniformRand = new UniformGenerator(seed);
 	}
 
 	public Server getServer(int i) {
@@ -40,7 +40,10 @@ public class Simulator {
 	}
 	
 	public void startService(Job job, int serverId) {
-		long delay = uniformRand.generate();
+		long delay = (long)((SERVER_Service_FROM[serverId] 
+		                                         + (SERVER_Service_TO[serverId] 
+		                                                              - SERVER_Service_FROM[serverId]) 
+		                                                              * serverServiceTime[serverId].generate())*1000);
 		schedule(new DepartureEvent(this, serverId, job), delay);
 	}
 }
