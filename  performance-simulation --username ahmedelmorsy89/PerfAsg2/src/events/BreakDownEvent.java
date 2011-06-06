@@ -23,7 +23,6 @@ public class BreakDownEvent extends TimerTask {
 		} else {
 			serviced.setDepartureTime(serviced.getDepartureTime() + delay);
 		}
-		
 	}
 
 }
