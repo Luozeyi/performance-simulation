@@ -38,7 +38,7 @@ public class ArrivalEvent extends TimerTask {
 		// check if server idle ? make it busy and schedule Service Event
 		if (simulator.getServer(serverId).isIdle()) {
 			simulator.getServer(serverId).setIdle(false);
-			simulator.startService();
+			simulator.startService(job, serverId);
 		} else {
 			// else enqueue and Q++
 			simulator.getServer(serverId).enqueueJob(job);
