@@ -59,10 +59,10 @@ public class UniformGenerator implements Generator {
 
 		UniformGenerator x = new UniformGenerator(5);
 		System.out.println(x.isUniformaly());
-		int n = 60000;
+		int n = 65000;
 		double[] list = new double[n];
 		for (int i = 0; i < n; i++) {
-			list[i] = ((double) x.generateS());
+			list[i] =8+4* ((double) x.generate());
 		}
 
 		HistogrameDrawble.draw(list);
