@@ -7,6 +7,7 @@ public class Job {
 	private long inspectionArrivalTime;
 	private long inspectionServiceTime;
 	private long departureTime;
+	private long delay;
 	
 	public long getArrivalTime() {
 		return arrivalTime;
@@ -38,7 +39,10 @@ public class Job {
 	public void setDepartureTime(long departureTime) {
 		this.departureTime = departureTime;
 	}
-	
-	
-	
+	public void setDelay(long delay) {
+		this.delay = delay;
+	}
+	public long getDelay() {
+		return this.delay;
+	}
 }
