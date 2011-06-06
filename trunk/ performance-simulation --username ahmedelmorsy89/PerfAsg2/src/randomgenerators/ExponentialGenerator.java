@@ -1,8 +1,8 @@
 package randomgenerators;
 
-public class ExponentialGenerator {
+public class ExponentialGenerator  implements Generator{
 
-	public static long generate() {
+	public double generate() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

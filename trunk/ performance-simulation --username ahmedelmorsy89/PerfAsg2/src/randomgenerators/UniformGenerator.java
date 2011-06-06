@@ -2,7 +2,7 @@ package randomgenerators;
 
 import utilities.HistogrameDrawble;
 
-public class UniformGenerator {
+public class UniformGenerator implements Generator {
 
 
 	private int current;
@@ -13,10 +13,16 @@ public class UniformGenerator {
 		this.current = seed;
 	}
 
-	public int generate() {
+	public int generateS() {
 
 		current = a * current % m;
 		return current;
+	}
+
+	public double generate() {
+
+		current = a * current % m;
+		return current/m;
 	}
 
 	public boolean isUniformaly()
@@ -25,7 +31,7 @@ public class UniformGenerator {
 		int[] hash = new int[10];
 		for(int i = 0 ; i < 1000;i++)
 		{
-			int cat = (generator.generate()/10);
+			int cat = (generator.generateS()/10);
 			if(cat < 10)
 				hash[cat]++;
 		}
