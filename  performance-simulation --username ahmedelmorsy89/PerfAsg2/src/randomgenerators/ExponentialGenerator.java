@@ -7,4 +7,10 @@ public class ExponentialGenerator  implements Generator{
 		return 0;
 	}
 
+	@Override
+	public int getSeed() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

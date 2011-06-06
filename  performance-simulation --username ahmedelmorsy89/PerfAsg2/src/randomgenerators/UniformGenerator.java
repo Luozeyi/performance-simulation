@@ -8,6 +8,7 @@ public class UniformGenerator implements Generator {
 	private int current;
 	private final int m = 2311;
 	private final int a = 13;
+	private static int seed;
 
 	public UniformGenerator(int seed) {
 		this.current = seed;
@@ -65,6 +66,12 @@ public class UniformGenerator implements Generator {
 		HistogrameDrawble.draw(list);
 	
 
+	}
+
+	@Override
+	public int getSeed() {
+		
+		return 0;
 	}
 
 
