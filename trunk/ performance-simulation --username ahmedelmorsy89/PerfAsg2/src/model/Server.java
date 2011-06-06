@@ -27,8 +27,8 @@ public class Server {
 		return id;
 	}
 
-	public void setBusy() {
-		this.idle = false;
+	public void setIdle(boolean state) {
+		this.idle = state;
 	}
 
 	public void enqueueJob(Job job) {
