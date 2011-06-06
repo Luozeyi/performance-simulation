@@ -1,10 +1,12 @@
 package events;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.TimerTask;
 
 import model.Job;
 import model.Simulator;
 import randomgenerators.ExponentialGenerator;
+import randomgenerators.UniformGenerator;
 
 public class ArrivalEvent extends TimerTask {
 
@@ -12,6 +14,7 @@ public class ArrivalEvent extends TimerTask {
 	private int serverId;
 	private Job job;
 	private boolean newItem;
+	static ExponentialGenerator itemArrival = new ExponentialGenerator();
 
 	public ArrivalEvent(Simulator sim, int id, Job job, boolean newItem) {
 		this.simulator = sim;
@@ -26,7 +29,7 @@ public class ArrivalEvent extends TimerTask {
 		// schedule next arrival event if it's the first queue
 		if (this.serverId == 1) {
 			job.setArrivalTime(System.currentTimeMillis());
-			long delay = ExponentialGenerator.generate();
+			double delay = itemArrival.generate();
 			this.simulator.schedule(new ArrivalEvent(simulator, serverId,
 					new Job(), true), delay);
 		} else {
@@ -34,7 +37,7 @@ public class ArrivalEvent extends TimerTask {
 		}
 		// check if server idle ? make it busy and schedule Service Event
 		if (simulator.getServer(serverId).isIdle()) {
-			simulator.getServer(serverId).setBusy();
+			simulator.getServer(serverId).setIdle(false);
 			simulator.startService();
 		} else {
 			// else enqueue and Q++
