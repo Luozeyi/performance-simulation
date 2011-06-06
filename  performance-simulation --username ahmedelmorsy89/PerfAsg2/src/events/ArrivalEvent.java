@@ -14,7 +14,8 @@ public class ArrivalEvent extends TimerTask {
 	private int serverId;
 	private Job job;
 	private boolean newItem;
-	static ExponentialGenerator itemArrival = new ExponentialGenerator();
+	private static final double ARRIVAL_MEAN = 1.0/30;
+	static ExponentialGenerator itemArrival = new ExponentialGenerator(ARRIVAL_MEAN);;
 
 	public ArrivalEvent(Simulator sim, int id, Job job, boolean newItem) {
 		this.simulator = sim;
@@ -29,9 +30,11 @@ public class ArrivalEvent extends TimerTask {
 		// schedule next arrival event if it's the first queue
 		if (this.serverId == 1) {
 			job.setArrivalTime(System.currentTimeMillis());
-			double delay = itemArrival.generate();
+			long delay = (long)(itemArrival.generate() * 1000);
+			Job temp = new Job();
+			temp.setArrivalTime(System.currentTimeMillis() + delay);
 			this.simulator.schedule(new ArrivalEvent(simulator, serverId,
-					new Job(), true), delay);
+				temp , true), delay);
 		} else {
 			job.setInspectionArrivalTime(System.currentTimeMillis());
 		}

@@ -3,13 +3,14 @@ package events;
 import java.util.TimerTask;
 import model.Job;
 import model.Simulator;
+import randomgenerators.SeedsGenerators;
 import randomgenerators.UniformGenerator;
 
 public class DepartureEvent extends TimerTask {
 	private Simulator simulator;
 	private int serverId;
 	private Job job;
-	static UniformGenerator itemInspection = new UniformGenerator(0);
+	static UniformGenerator itemInspection = new UniformGenerator(SeedsGenerators.getInstance().getSeed());
 
 	public DepartureEvent(Simulator sim, int id, Job job) {
 		this.simulator = sim;
