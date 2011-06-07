@@ -2,12 +2,19 @@ package model;
 
 public class Job {
 
+	private static int idCount = 1;
+	
+	private int id;
 	private long arrivalTime;
 	private long MachineServiceTime;
 	private long inspectionArrivalTime;
 	private long inspectionServiceTime;
 	private long departureTime;
 	private long delay;
+	
+	public Job() {
+		this.id = idCount++;
+	}
 	
 	public long getArrivalTime() {
 		return arrivalTime;
@@ -44,5 +51,13 @@ public class Job {
 	}
 	public long getDelay() {
 		return this.delay;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
