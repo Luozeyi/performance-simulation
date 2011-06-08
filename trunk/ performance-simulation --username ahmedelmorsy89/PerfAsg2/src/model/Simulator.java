@@ -15,8 +15,10 @@ public class Simulator {
 	private Server machiningCenter;
 	private Server inspectionStation;
 	private Timer timer;
+	private long startTime;
 	
 	private int goodItemsCount;
+	private boolean stop;
 	
 	static UniformGenerator[] serverServiceTime = 
 	{ new UniformGenerator(SeedsGenerators.getInstance().getSeed()), new UniformGenerator(SeedsGenerators.getInstance().getSeed())};
@@ -32,6 +34,7 @@ public class Simulator {
 	}
 
 	public void start() {
+		this.startTime = System.currentTimeMillis();
 		Job temp = new Job();
 		new ArrivalEvent(this, 0, temp, true, true);
 		new BreakDownEvent(this, machiningCenter, true);
@@ -71,5 +74,17 @@ public class Simulator {
 
 	public synchronized int getGoodItemsCount() {
 		return goodItemsCount;
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void stop() {
+		this.stop = true;
+	}
+
+	public boolean isStop() {
+		return stop;
 	}
 }
