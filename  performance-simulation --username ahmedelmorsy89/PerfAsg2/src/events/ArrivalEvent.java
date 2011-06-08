@@ -14,7 +14,6 @@ public class ArrivalEvent extends TimerTask {
 	private Job job;
 	private boolean newItem;
 	private static final double ARRIVAL_MEAN = 1.0 / Simulator.MINUTE;
-	private static boolean stopping = false;
 	
 	public static ExponentialGenerator itemArrival = new ExponentialGenerator(
 			ARRIVAL_MEAN);;
@@ -40,14 +39,13 @@ public class ArrivalEvent extends TimerTask {
 			if (this.newItem) {
 				if (this.serverId == 0) {
 					long delay = (long) (itemArrival.generate() * 1000);
-					if(!stopping)
+					if(! this.simulator.isStop())
 					{
 						Job temp = new Job();
 						temp.setArrivalTime(System.currentTimeMillis() + delay);
 						this.simulator.schedule(new ArrivalEvent(simulator,
 								serverId, temp, true, false), delay);
 						ResultsLogger.getInstance().logInterArrival(serverId, delay);
-						stopping = stopping || temp.getId() >= 500;
 					}
 				} else {
 					job.setInspectionArrivalTime(System.currentTimeMillis());
